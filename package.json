@@ -1,0 +1,73 @@
+{
+  "name": "mindmapper",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "description": "MindMapper — a mind-map learning tracker",
+  "author": {
+    "name": "DilshodbekMX",
+    "email": "dilshodbekpnu@gmail.com"
+  },
+  "homepage": "https://github.com/DilshodbekMX/MindMapper",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "server": "node server/index.js",
+    "dev:all": "concurrently -n server,web -c green,cyan \"npm run server\" \"npm run dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run build && node server/index.js",
+    "electron": "npm run build && electron .",
+    "rebuild:electron": "electron-builder install-app-deps",
+    "rebuild:node": "npm rebuild better-sqlite3",
+    "dist": "npm run build && electron-builder --linux",
+    "dist:deb": "npm run build && electron-builder --linux deb",
+    "dist:appimage": "npm run build && electron-builder --linux AppImage"
+  },
+  "dependencies": {
+    "@dagrejs/dagre": "^1.1.4",
+    "@xyflow/react": "^12.3.5",
+    "better-sqlite3": "^12.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "html-to-image": "^1.11.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3",
+    "vite": "^6.0.5"
+  },
+  "build": {
+    "appId": "com.mindmapper.app",
+    "productName": "MindMapper",
+    "files": [
+      "dist/**/*",
+      "server/**/*",
+      "electron/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office",
+      "synopsis": "Mind-map learning tracker",
+      "icon": "build/icons"
+    },
+    "deb": {
+      "depends": []
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
+}
