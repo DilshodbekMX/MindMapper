@@ -177,3 +177,4 @@ src/
 
 - Single-user, no auth — intended to run locally. If you ever host it publicly,
   add authentication first.
+# MindMapper
